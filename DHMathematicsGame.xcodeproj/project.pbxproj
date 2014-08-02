@@ -1,0 +1,474 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CB0B9B91198D376700A31743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0B9B90198D376700A31743 /* Foundation.framework */; };
+		CB0B9B93198D376700A31743 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0B9B92198D376700A31743 /* CoreGraphics.framework */; };
+		CB0B9B95198D376700A31743 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0B9B94198D376700A31743 /* UIKit.framework */; };
+		CB0B9B9B198D376700A31743 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB0B9B99198D376700A31743 /* InfoPlist.strings */; };
+		CB0B9B9D198D376700A31743 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B9B9C198D376700A31743 /* main.m */; };
+		CB0B9BA1198D376700A31743 /* DHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B9BA0198D376700A31743 /* DHAppDelegate.m */; };
+		CB0B9BA4198D376700A31743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB0B9BA2198D376700A31743 /* Main.storyboard */; };
+		CB0B9BA7198D376700A31743 /* DHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B9BA6198D376700A31743 /* DHViewController.m */; };
+		CB0B9BA9198D376700A31743 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB0B9BA8198D376700A31743 /* Images.xcassets */; };
+		CB0B9BB0198D376700A31743 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0B9BAF198D376700A31743 /* XCTest.framework */; };
+		CB0B9BB1198D376700A31743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0B9B90198D376700A31743 /* Foundation.framework */; };
+		CB0B9BB2198D376700A31743 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0B9B94198D376700A31743 /* UIKit.framework */; };
+		CB0B9BBA198D376700A31743 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB0B9BB8198D376700A31743 /* InfoPlist.strings */; };
+		CB0B9BBC198D376700A31743 /* DHMathematicsGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B9BBB198D376700A31743 /* DHMathematicsGameTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CB0B9BB3198D376700A31743 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB0B9B85198D376700A31743 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CB0B9B8C198D376700A31743;
+			remoteInfo = DHMathematicsGame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CB0B9B8D198D376700A31743 /* DHMathematicsGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DHMathematicsGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB0B9B90198D376700A31743 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CB0B9B92198D376700A31743 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CB0B9B94198D376700A31743 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CB0B9B98198D376700A31743 /* DHMathematicsGame-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DHMathematicsGame-Info.plist"; sourceTree = "<group>"; };
+		CB0B9B9A198D376700A31743 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CB0B9B9C198D376700A31743 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CB0B9B9E198D376700A31743 /* DHMathematicsGame-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DHMathematicsGame-Prefix.pch"; sourceTree = "<group>"; };
+		CB0B9B9F198D376700A31743 /* DHAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHAppDelegate.h; sourceTree = "<group>"; };
+		CB0B9BA0198D376700A31743 /* DHAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHAppDelegate.m; sourceTree = "<group>"; };
+		CB0B9BA3198D376700A31743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CB0B9BA5198D376700A31743 /* DHViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHViewController.h; sourceTree = "<group>"; };
+		CB0B9BA6198D376700A31743 /* DHViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHViewController.m; sourceTree = "<group>"; };
+		CB0B9BA8198D376700A31743 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CB0B9BAE198D376700A31743 /* DHMathematicsGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DHMathematicsGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB0B9BAF198D376700A31743 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CB0B9BB7198D376700A31743 /* DHMathematicsGameTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DHMathematicsGameTests-Info.plist"; sourceTree = "<group>"; };
+		CB0B9BB9198D376700A31743 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CB0B9BBB198D376700A31743 /* DHMathematicsGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHMathematicsGameTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CB0B9B8A198D376700A31743 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB0B9B93198D376700A31743 /* CoreGraphics.framework in Frameworks */,
+				CB0B9B95198D376700A31743 /* UIKit.framework in Frameworks */,
+				CB0B9B91198D376700A31743 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB0B9BAB198D376700A31743 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB0B9BB0198D376700A31743 /* XCTest.framework in Frameworks */,
+				CB0B9BB2198D376700A31743 /* UIKit.framework in Frameworks */,
+				CB0B9BB1198D376700A31743 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CB0B9B84198D376700A31743 = {
+			isa = PBXGroup;
+			children = (
+				CB0B9B96198D376700A31743 /* DHMathematicsGame */,
+				CB0B9BB5198D376700A31743 /* DHMathematicsGameTests */,
+				CB0B9B8F198D376700A31743 /* Frameworks */,
+				CB0B9B8E198D376700A31743 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CB0B9B8E198D376700A31743 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB0B9B8D198D376700A31743 /* DHMathematicsGame.app */,
+				CB0B9BAE198D376700A31743 /* DHMathematicsGameTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB0B9B8F198D376700A31743 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB0B9B90198D376700A31743 /* Foundation.framework */,
+				CB0B9B92198D376700A31743 /* CoreGraphics.framework */,
+				CB0B9B94198D376700A31743 /* UIKit.framework */,
+				CB0B9BAF198D376700A31743 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CB0B9B96198D376700A31743 /* DHMathematicsGame */ = {
+			isa = PBXGroup;
+			children = (
+				CB0B9B9F198D376700A31743 /* DHAppDelegate.h */,
+				CB0B9BA0198D376700A31743 /* DHAppDelegate.m */,
+				CB0B9BA2198D376700A31743 /* Main.storyboard */,
+				CB0B9BA5198D376700A31743 /* DHViewController.h */,
+				CB0B9BA6198D376700A31743 /* DHViewController.m */,
+				CB0B9BA8198D376700A31743 /* Images.xcassets */,
+				CB0B9B97198D376700A31743 /* Supporting Files */,
+			);
+			path = DHMathematicsGame;
+			sourceTree = "<group>";
+		};
+		CB0B9B97198D376700A31743 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CB0B9B98198D376700A31743 /* DHMathematicsGame-Info.plist */,
+				CB0B9B99198D376700A31743 /* InfoPlist.strings */,
+				CB0B9B9C198D376700A31743 /* main.m */,
+				CB0B9B9E198D376700A31743 /* DHMathematicsGame-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB0B9BB5198D376700A31743 /* DHMathematicsGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				CB0B9BBB198D376700A31743 /* DHMathematicsGameTests.m */,
+				CB0B9BB6198D376700A31743 /* Supporting Files */,
+			);
+			path = DHMathematicsGameTests;
+			sourceTree = "<group>";
+		};
+		CB0B9BB6198D376700A31743 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CB0B9BB7198D376700A31743 /* DHMathematicsGameTests-Info.plist */,
+				CB0B9BB8198D376700A31743 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CB0B9B8C198D376700A31743 /* DHMathematicsGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB0B9BBF198D376700A31743 /* Build configuration list for PBXNativeTarget "DHMathematicsGame" */;
+			buildPhases = (
+				CB0B9B89198D376700A31743 /* Sources */,
+				CB0B9B8A198D376700A31743 /* Frameworks */,
+				CB0B9B8B198D376700A31743 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DHMathematicsGame;
+			productName = DHMathematicsGame;
+			productReference = CB0B9B8D198D376700A31743 /* DHMathematicsGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CB0B9BAD198D376700A31743 /* DHMathematicsGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB0B9BC2198D376700A31743 /* Build configuration list for PBXNativeTarget "DHMathematicsGameTests" */;
+			buildPhases = (
+				CB0B9BAA198D376700A31743 /* Sources */,
+				CB0B9BAB198D376700A31743 /* Frameworks */,
+				CB0B9BAC198D376700A31743 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CB0B9BB4198D376700A31743 /* PBXTargetDependency */,
+			);
+			name = DHMathematicsGameTests;
+			productName = DHMathematicsGameTests;
+			productReference = CB0B9BAE198D376700A31743 /* DHMathematicsGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CB0B9B85198D376700A31743 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DH;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = DuetHealth;
+				TargetAttributes = {
+					CB0B9BAD198D376700A31743 = {
+						TestTargetID = CB0B9B8C198D376700A31743;
+					};
+				};
+			};
+			buildConfigurationList = CB0B9B88198D376700A31743 /* Build configuration list for PBXProject "DHMathematicsGame" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CB0B9B84198D376700A31743;
+			productRefGroup = CB0B9B8E198D376700A31743 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CB0B9B8C198D376700A31743 /* DHMathematicsGame */,
+				CB0B9BAD198D376700A31743 /* DHMathematicsGameTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CB0B9B8B198D376700A31743 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB0B9BA9198D376700A31743 /* Images.xcassets in Resources */,
+				CB0B9B9B198D376700A31743 /* InfoPlist.strings in Resources */,
+				CB0B9BA4198D376700A31743 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB0B9BAC198D376700A31743 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB0B9BBA198D376700A31743 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CB0B9B89198D376700A31743 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB0B9BA1198D376700A31743 /* DHAppDelegate.m in Sources */,
+				CB0B9BA7198D376700A31743 /* DHViewController.m in Sources */,
+				CB0B9B9D198D376700A31743 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB0B9BAA198D376700A31743 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB0B9BBC198D376700A31743 /* DHMathematicsGameTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CB0B9BB4198D376700A31743 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CB0B9B8C198D376700A31743 /* DHMathematicsGame */;
+			targetProxy = CB0B9BB3198D376700A31743 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CB0B9B99198D376700A31743 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB0B9B9A198D376700A31743 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CB0B9BA2198D376700A31743 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB0B9BA3198D376700A31743 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CB0B9BB8198D376700A31743 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB0B9BB9198D376700A31743 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CB0B9BBD198D376700A31743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		CB0B9BBE198D376700A31743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CB0B9BC0198D376700A31743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHMathematicsGame/DHMathematicsGame-Prefix.pch";
+				INFOPLIST_FILE = "DHMathematicsGame/DHMathematicsGame-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CB0B9BC1198D376700A31743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHMathematicsGame/DHMathematicsGame-Prefix.pch";
+				INFOPLIST_FILE = "DHMathematicsGame/DHMathematicsGame-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CB0B9BC3198D376700A31743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DHMathematicsGame.app/DHMathematicsGame";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHMathematicsGame/DHMathematicsGame-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DHMathematicsGameTests/DHMathematicsGameTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CB0B9BC4198D376700A31743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DHMathematicsGame.app/DHMathematicsGame";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHMathematicsGame/DHMathematicsGame-Prefix.pch";
+				INFOPLIST_FILE = "DHMathematicsGameTests/DHMathematicsGameTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CB0B9B88198D376700A31743 /* Build configuration list for PBXProject "DHMathematicsGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB0B9BBD198D376700A31743 /* Debug */,
+				CB0B9BBE198D376700A31743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB0B9BBF198D376700A31743 /* Build configuration list for PBXNativeTarget "DHMathematicsGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB0B9BC0198D376700A31743 /* Debug */,
+				CB0B9BC1198D376700A31743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CB0B9BC2198D376700A31743 /* Build configuration list for PBXNativeTarget "DHMathematicsGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB0B9BC3198D376700A31743 /* Debug */,
+				CB0B9BC4198D376700A31743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CB0B9B85198D376700A31743 /* Project object */;
+}
