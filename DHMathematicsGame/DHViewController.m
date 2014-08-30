@@ -19,11 +19,13 @@ static NSString* cellIdentifier = @"iconCell";
 #define DHOptionNotSelectedKey @"noOptipnSelected"
 
 //Enum to maintain game state
-enum gameState { initialGameState,
+enum gameState {
+            initialGameState,
                  firstInstructionRead,
                  collectionCellSelected,
                  revealButtonPressed,
                  resetButtonPressd };
+
 typedef enum gameState currentGameState;
 
 @interface DHViewController ()
@@ -50,6 +52,7 @@ typedef enum gameState currentGameState;
 @property (strong, nonatomic) UIView* loadingAnimationHolderView;
 @property (strong, nonatomic) UIPanGestureRecognizer* panGestureRecognizer;
 
+@property (strong,nonatomic) UIAlertView* generalAlertView;
 @property (assign, nonatomic) float initialX;
 @property (assign, nonatomic) float initialY;
 
@@ -61,25 +64,50 @@ typedef enum gameState currentGameState;
 @implementation DHViewController
 
 - (void)viewDidLoad {
-    self.stateOfCurrentGame = initialGameState;
+
     [super viewDidLoad];
-    self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector (handlePanFrom:)];
+    
+    [self initalizeAllView];
+
+    self.stateOfCurrentGame = initialGameState;
+    
+    
     self.initialX = 600;
     self.initialY = 150;
-    self.imageSequenceStorage = [[NSMutableArray alloc] initWithCapacity:100];
-    [self.proceedButton addTarget:self action:@selector (proceedButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
-    [self showInstructionViewWithText:@"Select any option to get started" andIsRevealingView:NO];
-
+    
     [self resetParameters];
 
+    
+}
+
+-(void)initalizeAllView{
+    self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector (handlePanFrom:)];
+    self.imageSequenceStorage = [[NSMutableArray alloc] initWithCapacity:100];
+    
+    self.instructionsNotificationsView = [[UIView alloc] initWithFrame:CGRectMake (self.view.center.x-113, self.view.center.y-275, 450, 450)];
+    [self.instructionsNotificationsView addGestureRecognizer:self.panGestureRecognizer];
+    self.generalAlertView=[[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    
+    self.instructionLabel = [[UILabel alloc] initWithFrame:CGRectMake (10, 10, self.instructionsNotificationsView.frame.size.width - 20, 300)];
+    [self.instructionsNotificationsView addSubview:self.instructionLabel];
+    
+                self.revealationImage = [[UIImageView alloc] initWithFrame:CGRectMake (self.instructionsNotificationsView.frame.size.width / 2 + 150, 225, 96, 96)];
+    
+            self.okButton = [[UIButton alloc] initWithFrame:CGRectMake (30, self.instructionLabel.frame.origin.y + 300, 100, 40)];
+                self.wrongAnswerButton = [[UIButton alloc] initWithFrame:CGRectMake (90 + self.okButton.frame.size.width, self.instructionLabel.frame.origin.y + 250, 200, 40)];
+                self.resetButton = [[UIButton alloc] initWithFrame:CGRectMake (self.okButton.frame.size.width, self.instructionLabel.frame.origin.y + 250, 100, 40)];
+    [self.proceedButton addTarget:self action:@selector (proceedButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self showInstructionViewWithText:@"Select any option to get started" andIsRevealingView:NO];
+
+    
     [self showCalculationAnimationWithDuration:3.0f];
+    
 }
 
 - (void)handlePanFrom:(UIPanGestureRecognizer*)recognizer {
 
     CGPoint translation = [recognizer translationInView:recognizer.view];
-    CGPoint velocity = [recognizer velocityInView:recognizer.view];
 
     if (recognizer.state == UIGestureRecognizerStateBegan) {
 
@@ -88,18 +116,17 @@ typedef enum gameState currentGameState;
         self.initialX = self.instructionsNotificationsView.frame.origin.x + translation.x;
         self.initialY = self.instructionsNotificationsView.frame.origin.y + translation.y;
 
-        //        self.initialX = translation.x + self.initialX;
-        //      self.initialY = translation.y + self.initialY;
-        DLog (@"Moving With X Value %f and Y Value %f", translation.x, translation.y);
+        DLog (@"Moving With X Value %f and Y Value %f", self.initialX, self.initialY);
 
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
-        //self.initialX = self.instructionsNotificationsView.frame.origin.x;
-        //self.initialY = self.instructionsNotificationsView.frame.origin.y;
+
 
         [UIView animateWithDuration:.05 delay:0
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
+                             
                              self.instructionsNotificationsView.frame = CGRectMake (self.initialX , self.initialY, self.instructionsNotificationsView.frame.size.width, self.instructionsNotificationsView.frame.size.height);
+                             
                          }
                          completion:NULL];
 
@@ -109,7 +136,7 @@ typedef enum gameState currentGameState;
 
 - (void)resetParameters {
 
-    NSInteger value = NUMBER_OF_ITEMS_IN_COLLECTION_VIEW;
+    NSInteger numberOfTotalImagesOnCollectionView = NUMBER_OF_ITEMS_IN_COLLECTION_VIEW;
 
     if (self.stateOfCurrentGame != initialGameState) {
         self.stateOfCurrentGame = firstInstructionRead;
@@ -123,11 +150,15 @@ typedef enum gameState currentGameState;
     self.okButton.frame = CGRectMake (10, self.instructionLabel.frame.origin.y + 330, self.instructionsNotificationsView.frame.size.width - 20, 40);
     self.didUserSelectOption = NO;
     [self.imageSequenceStorage removeAllObjects];
-    while (value) {
+    
+    //Total number of images to display on the screen
+
+    while (numberOfTotalImagesOnCollectionView) {
         [self.imageSequenceStorage addObject:[NSString stringWithFormat:@"%d", [DHUtilityMethodsProvider getRandomNumber]]];
-        value--;
+        numberOfTotalImagesOnCollectionView--;
     }
 
+    //Initializing index paths
     self.previousSelectedRowInPrimaryTable = [NSIndexPath indexPathForRow:-1 inSection:0];
     self.selectedRowInPrimaryTable = [NSIndexPath indexPathForRow:-1 inSection:0];
     self.fixedImageNumber = [DHUtilityMethodsProvider getRandomNumber];
@@ -249,28 +280,28 @@ typedef enum gameState currentGameState;
                         completion:NULL];
 
     } else {
-        UIAlertView* alertForNoOptionSelection = [[UIAlertView alloc] initWithTitle:@"No Option selected" message:@"Please select an option to reveal predication" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 
-        [alertForNoOptionSelection show];
+
+        [self showGeneralAlertViewWithTitle:@"No Option selected" andMessage:@"Please select an option to reveal predication"];
     }
+}
+
+-(void)showGeneralAlertViewWithTitle:(NSString*)alertTitle andMessage:(NSString*)message{
+    [self.generalAlertView setTitle:alertTitle];
+    [self.generalAlertView setMessage:message];
+    [self.generalAlertView show];
 }
 
 - (void)showInstructionViewWithText:(NSString*)text andIsRevealingView:(BOOL)isRevealingView {
 
-    if (!self.instructionsNotificationsView) {
-        self.instructionsNotificationsView = [[UIView alloc] initWithFrame:CGRectMake (600, 150, 450, 450)];
-        [self.instructionsNotificationsView addGestureRecognizer:self.panGestureRecognizer];
-    }
+
     //    self.revealView.center = self.mainCollectionView.center;
 
     [self.instructionsNotificationsView setBackgroundColor:[UIColor grayColor]];
 
     UIFont* defaultFontForInstructionviews = [UIFont fontWithName:@"HelveticaNeue-Light" size:24.0f];
 
-    if (!self.instructionLabel) {
-        self.instructionLabel = [[UILabel alloc] initWithFrame:CGRectMake (10, 10, self.instructionsNotificationsView.frame.size.width - 20, 300)];
-        [self.instructionsNotificationsView addSubview:self.instructionLabel];
-    }
+
 
     self.instructionLabel.backgroundColor = [UIColor grayColor];
     self.instructionLabel.numberOfLines = 8;
@@ -283,19 +314,15 @@ typedef enum gameState currentGameState;
     if (isRevealingView) {
 
         self.loadingAnimationHolderView.alpha = 1.0;
-        if (!self.revealationImage) {
-            self.revealationImage = [[UIImageView alloc] initWithFrame:CGRectMake (self.instructionsNotificationsView.frame.size.width / 2 + 150, 225, 96, 96)];
-        }
+
 
         [self.revealationImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png", self.fixedImageNumber]]];
         self.revealationImage.alpha = 0.0;
 
         [self.instructionsNotificationsView addSubview:self.revealationImage];
-        self.okButton = [[UIButton alloc] initWithFrame:CGRectMake (30, self.instructionLabel.frame.origin.y + 300, 100, 40)];
 
-        if (!self.wrongAnswerButton) {
-            self.wrongAnswerButton = [[UIButton alloc] initWithFrame:CGRectMake (90 + self.okButton.frame.size.width, self.instructionLabel.frame.origin.y + 250, 200, 40)];
-        }
+
+
 
         [self.wrongAnswerButton setTitle:@"Wrong Answer" forState:UIControlStateNormal];
         self.wrongAnswerButton.alpha = 1.0;
@@ -303,11 +330,10 @@ typedef enum gameState currentGameState;
         [self.wrongAnswerButton addTarget:self action:@selector (userSaidWrongAnswer:) forControlEvents:UIControlEventTouchUpInside];
         [self.instructionsNotificationsView addSubview:self.wrongAnswerButton];
 
-        if (!self.resetButton) {
-            self.resetButton = [[UIButton alloc] initWithFrame:CGRectMake (self.okButton.frame.size.width, self.instructionLabel.frame.origin.y + 250, 100, 40)];
-        }
+
 
         [self.resetButton setTitle:@"Reset" forState:UIControlStateNormal];
+        self.resetButton.alpha=1.0;
         [self.resetButton.titleLabel setFont:defaultFontForInstructionviews];
         [self.resetButton addTarget:self action:@selector (resetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.instructionsNotificationsView addSubview:self.resetButton];
@@ -324,7 +350,7 @@ typedef enum gameState currentGameState;
                         completion:NULL];
 
     } else {
-        self.okButton = [[UIButton alloc] initWithFrame:CGRectMake (10, self.instructionLabel.frame.origin.y + 330, self.instructionsNotificationsView.frame.size.width - 20, 40)];
+        self.okButton.frame = CGRectMake (10, self.instructionLabel.frame.origin.y + 330, self.instructionsNotificationsView.frame.size.width - 20, 40);
         [self.okButton setTitle:@"Ok" forState:UIControlStateNormal];
         [self.okButton addTarget:self action:@selector (okButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -390,7 +416,7 @@ typedef enum gameState currentGameState;
 }
 
 - (IBAction)revealSelectedOption:(id)sender {
-
+    [self showInstructionView];
     self.okButton.alpha = 0.0;
     [self showInstructionViewWithText:@"Image corresponding to your answer is" andIsRevealingView:YES];
 }
@@ -400,13 +426,14 @@ typedef enum gameState currentGameState;
     __block float triangleSideLength = 200;
     __block float triangleHeight = 300.0f;
     __block float initialYPositionOfAnimationBalls = 0;
-
-    if (!self.loadingAnimationHolderView) {
-        self.loadingAnimationHolderView = [[UIView alloc] initWithFrame:CGRectMake (0, 0, 400, 450)];
-    }
-
+    
+    
+    self.loadingAnimationHolderView = [[UIView alloc] initWithFrame:CGRectMake (0, 0, 450, 450)];
     self.loadingAnimationHolderView.alpha = 0.0;
     [self.loadingAnimationHolderView setBackgroundColor:[UIColor whiteColor]];
+
+
+
 
     UIImageView* greenLoadingCircle = [[UIImageView alloc] initWithFrame:CGRectMake (positionToGo, initialYPositionOfAnimationBalls, 48, 48)];
     [greenLoadingCircle setImage:[UIImage imageNamed:@"circle1.jpeg"]];
@@ -495,46 +522,57 @@ typedef enum gameState currentGameState;
 }
 
 - (void)hideInstructionView {
-    self.instructionsNotificationsView.frame = CGRectMake (0, 134, 0, 0);
+    
+    
+/*    self.instructionsNotificationsView.frame = CGRectMake (0, 134, 0, 0);
     self.instructionLabel.frame = self.instructionsNotificationsView.frame;
     self.okButton.frame = CGRectMake (self.instructionsNotificationsView.frame.origin.x, self.instructionsNotificationsView.frame.origin.y, 0, 0);
+  */
+    
+    self.instructionsNotificationsView.transform = CGAffineTransformMakeScale(1, 1);
+        self.instructionLabel.transform = CGAffineTransformMakeScale(1, 1);
+        self.okButton.transform = CGAffineTransformMakeScale(1, 1);
+    
+
+    [UIView animateWithDuration:2.0
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+     
+                     animations:^(){
+                         self.instructionsNotificationsView.transform = CGAffineTransformMakeScale(0.0, 0.0);
+                         //self.instructionsNotificationsView.center = self.view.center;
+                         self.instructionLabel.transform = CGAffineTransformMakeScale(0.0, 0.0);
+                        // self.instructionLabel.center = self.view.center;
+                         self.okButton.transform = CGAffineTransformMakeScale(0.0, 0.0);
+                         //self.okButton.center = self.view.center;
+                     }
+                     completion:nil];
+    
 }
 
 - (void)showInstructionView {
-    self.instructionsNotificationsView.frame = CGRectMake (self.mainCollectionView.center.x - 200, 150, 400, 450);
-    self.instructionLabel.frame = CGRectMake (10, 10, self.instructionsNotificationsView.frame.size.width - 20, 300);
-    self.okButton.frame = CGRectMake (150, 300, 100, 50);
+//    self.instructionsNotificationsView.frame = CGRectMake (self.mainCollectionView.center.x - 200, 150, 400, 450);
+  //  self.instructionLabel.frame = CGRectMake (10, 10, self.instructionsNotificationsView.frame.size.width - 20, 300);
+    //self.okButton.frame = CGRectMake (150, 300, 100, 50);
+    
+    self.instructionsNotificationsView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    self.instructionLabel.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    self.okButton.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    
+    
+    [UIView animateWithDuration:2.0
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+     
+                     animations:^(){
+                         self.instructionsNotificationsView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                         //self.instructionsNotificationsView.center = self.view.center;
+                         self.instructionLabel.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                         // self.instructionLabel.center = self.view.center;
+                         self.okButton.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                         //self.okButton.center = self.view.center;
+                     }
+                     completion:nil];
+    
 }
-
-- (void)addGestureRecognizerToInstructionsView {
-
-    // UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self.instructionsNotificationsView action:@selector (handlePan:)];
-    //[self.instructionsNotificationsView addGestureRecognizer:recognizer];
-}
-/*
-- (IBAction)handlePan:(UIPanGestureRecognizer*)recognizer {
-
-    CGPoint translation = [recognizer translationInView:self.instructionsNotificationsView];
-
-    recognizer.view.center = CGPointMake (recognizer.view.center.x + translation.x,
-                                          recognizer.view.center.y + translation.y);
-
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
-
-        // Check here for the position of the view when the user stops touching the screen
-
-        // Set "CGFloat finalX" and "CGFloat finalY", depending on the last position of the touch
-
-        // Use this to animate the position of your view to where you want
-        [UIView animateWithDuration:2.0f
-                              delay:0
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             CGPoint finalPoint = CGPointMake(finalX, finalY);
-                             recognizer.view.center = finalPoint; }
-                         completion:nil];
-    }
-
-    [recognizer setTranslation:CGPointMake (0, 0) inView:self.instructionsNotificationsView];
-}*/
 @end
