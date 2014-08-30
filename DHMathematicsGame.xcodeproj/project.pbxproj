@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		91D9BCB319B265DB003BED6B /* DHColorDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D9BCB219B265DB003BED6B /* DHColorDefaults.m */; };
 		CB0B9B91198D376700A31743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0B9B90198D376700A31743 /* Foundation.framework */; };
 		CB0B9B93198D376700A31743 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0B9B92198D376700A31743 /* CoreGraphics.framework */; };
 		CB0B9B95198D376700A31743 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0B9B94198D376700A31743 /* UIKit.framework */; };
@@ -67,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		91D9BCB119B265DB003BED6B /* DHColorDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHColorDefaults.h; sourceTree = "<group>"; };
+		91D9BCB219B265DB003BED6B /* DHColorDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHColorDefaults.m; sourceTree = "<group>"; };
 		CB0B9B8D198D376700A31743 /* DHMathematicsGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DHMathematicsGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0B9B90198D376700A31743 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CB0B9B92198D376700A31743 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -280,6 +283,8 @@
 			children = (
 				CB0B9C02198D3E1700A31743 /* DHUtilityMethodsProvider.h */,
 				CB0B9C03198D3E1700A31743 /* DHUtilityMethodsProvider.m */,
+				91D9BCB119B265DB003BED6B /* DHColorDefaults.h */,
+				91D9BCB219B265DB003BED6B /* DHColorDefaults.m */,
 			);
 			name = "Utility Methods";
 			sourceTree = "<group>";
@@ -429,6 +434,7 @@
 				CB0B9BA7198D376700A31743 /* DHViewController.m in Sources */,
 				CB0B9C04198D3E1700A31743 /* DHUtilityMethodsProvider.m in Sources */,
 				CB0B9B9D198D376700A31743 /* main.m in Sources */,
+				91D9BCB319B265DB003BED6B /* DHColorDefaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

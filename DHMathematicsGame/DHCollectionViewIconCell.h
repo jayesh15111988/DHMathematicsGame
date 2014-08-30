@@ -12,6 +12,5 @@
 @property (strong, nonatomic) IBOutlet UIImageView* image;
 @property (strong, nonatomic) IBOutlet UILabel* label;
 @property (assign, nonatomic) NSInteger imageNumberAssigned;
-@property (assign,nonatomic) BOOL isImageAssigned;
 
 @end
