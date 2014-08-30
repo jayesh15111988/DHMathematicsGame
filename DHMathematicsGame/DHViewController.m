@@ -155,9 +155,15 @@ typedef enum gameState currentGameState;
 
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
 
+      //Current way
         self.initialX = self.instructionsNotificationsView.frame.origin.x + translation.x;
         self.initialY = self.instructionsNotificationsView.frame.origin.y + translation.y;
 
+        //Alternate way to make movement immediately on drag
+//        self.instructionsNotificationsView.frame = CGRectMake (self.initialX+ translation.x , self.initialY+translation.y, self.instructionsNotificationsView.frame.size.width, self.instructionsNotificationsView.frame.size.height);
+        
+        
+        
         DLog (@"Moving With X Value %f and Y Value %f", self.initialX, self.initialY);
 
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
@@ -167,7 +173,11 @@ typedef enum gameState currentGameState;
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              
+                             //Current way
                              self.instructionsNotificationsView.frame = CGRectMake (self.initialX , self.initialY, self.instructionsNotificationsView.frame.size.width, self.instructionsNotificationsView.frame.size.height);
+                             
+                             //Alternative way
+                             //Comment out above line of code
                              
                          }
                          completion:NULL];
