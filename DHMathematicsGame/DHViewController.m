@@ -16,17 +16,17 @@
 #define NUMBER_OF_ITEMS_IN_COLLECTION_VIEW 100
 #define DEFAULT_DURATION_FOR_ANIMATION 2.0
 #define DEFAULT_DURATION_FOR_HIDE_SHOW_ANIMATION 2
-#define DEFAULT_DURATION_FOR_REVEAL_IMAGE_ANIMATION 7.0
+#define DEFAULT_DURATION_FOR_REVEAL_IMAGE_ANIMATION 6.0f
 static NSString* cellIdentifier = @"iconCell";
 #define DHOptionNotSelectedKey @"noOptipnSelected"
 
 //Enum to maintain game state
 enum gameState {
-            initialGameState,
-                 firstInstructionRead,
-                 collectionCellSelected,
-                 revealButtonPressed,
-                 resetButtonPressd };
+    initialGameState,
+    firstInstructionRead,
+    collectionCellSelected,
+    revealButtonPressed,
+    resetButtonPressd };
 
 typedef enum gameState currentGameState;
 
@@ -67,11 +67,11 @@ typedef enum gameState currentGameState;
 @implementation DHViewController
 
 - (void)viewDidLoad {
-
+    
     [super viewDidLoad];
     
     [self initalizeAllView];
-
+    
     self.stateOfCurrentGame = initialGameState;
     
     
@@ -79,7 +79,7 @@ typedef enum gameState currentGameState;
     self.initialY = 150;
     
     [self resetParameters];
-
+    
     
 }
 
@@ -103,9 +103,9 @@ typedef enum gameState currentGameState;
     self.dragToMoveLabel.text=@"Drag To Move";
     [self.instructionsNotificationsView addSubview:self.dragToMoveLabel];
     
-                self.revealationImage = [[UIImageView alloc] initWithFrame:                                        CGRectMake ((self.instructionsNotificationsView.frame.size.width/2)-48, 225, 96, 96)];
-                                        [self.instructionsNotificationsView addSubview:self.revealationImage];
-            self.okButton = [[UIButton alloc] initWithFrame:CGRectMake (30, self.instructionLabel.frame.origin.y + 300, 100, 60)];
+    self.revealationImage = [[UIImageView alloc] initWithFrame:                                        CGRectMake ((self.instructionsNotificationsView.frame.size.width/2)-48, 225, 96, 96)];
+    [self.instructionsNotificationsView addSubview:self.revealationImage];
+    self.okButton = [[UIButton alloc] initWithFrame:CGRectMake (30, self.instructionLabel.frame.origin.y + 300, 100, 60)];
     
     [self addBorderDesignToView:self.revealationImage andColor:[DHColorDefaults getLightGreenColor] andBorderWidth:2.0f];
     [self.okButton setBackgroundColor:[DHColorDefaults getLightOrangeColor]];
@@ -114,7 +114,7 @@ typedef enum gameState currentGameState;
     [self.proceedButton addTarget:self action:@selector (proceedButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self showInstructionViewWithText:@"Select any option to get started" andIsRevealingView:NO];
-
+    
     
     [self showCalculationAnimationWithDuration:3.0f];
     [self setupResetButton];
@@ -126,7 +126,7 @@ typedef enum gameState currentGameState;
     
     
     
-                self.resetButton = [[UIButton alloc] initWithFrame:CGRectMake (20, self.instructionLabel.frame.origin.y + 350, 150, 60)];
+    self.resetButton = [[UIButton alloc] initWithFrame:CGRectMake (20, self.instructionLabel.frame.origin.y + 350, 150, 60)];
     self.resetButton.alpha=0.0;
     [self.resetButton setBackgroundColor:[DHColorDefaults getLightOrangeColor]];
     
@@ -137,7 +137,7 @@ typedef enum gameState currentGameState;
 }
 
 -(void)setupWrongAnswerButton{
-     self.wrongAnswerButton = [[UIButton alloc] initWithFrame:CGRectMake (220, self.instructionLabel.frame.origin.y + 350, 200, 60)];
+    self.wrongAnswerButton = [[UIButton alloc] initWithFrame:CGRectMake (220, self.instructionLabel.frame.origin.y + 350, 200, 60)];
     self.wrongAnswerButton.alpha=0.0;
     [self.wrongAnswerButton setBackgroundColor:[DHColorDefaults getLightOrangeColor]];
     [self.wrongAnswerButton setTitle:@"Wrong Answer" forState:UIControlStateNormal];
@@ -148,28 +148,28 @@ typedef enum gameState currentGameState;
 }
 
 - (void)handlePanFrom:(UIPanGestureRecognizer*)recognizer {
-
+    
     CGPoint translation = [recognizer translationInView:recognizer.view];
-
+    
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-
+        
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-
-      //Current way
+        
+        //Current way
         self.initialX = self.instructionsNotificationsView.frame.origin.x + translation.x;
         self.initialY = self.instructionsNotificationsView.frame.origin.y + translation.y;
-
+        
         //Alternate way to make movement immediately on drag
-//        self.instructionsNotificationsView.frame = CGRectMake (self.initialX+ translation.x , self.initialY+translation.y, self.instructionsNotificationsView.frame.size.width, self.instructionsNotificationsView.frame.size.height);
+        //        self.instructionsNotificationsView.frame = CGRectMake (self.initialX+ translation.x , self.initialY+translation.y, self.instructionsNotificationsView.frame.size.width, self.instructionsNotificationsView.frame.size.height);
         
         
         
         DLog (@"Moving With X Value %f and Y Value %f", self.initialX, self.initialY);
-
+        
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
-
-
-        [UIView animateWithDuration:DEFAULT_DURATION_FOR_ANIMATION delay:0
+        
+        
+        [UIView animateWithDuration:DEFAULT_DURATION_FOR_ANIMATION/2 delay:0
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              
@@ -181,19 +181,19 @@ typedef enum gameState currentGameState;
                              
                          }
                          completion:NULL];
-
+        
         DLog (@"Movement finished With X Value %f and Y Value %f", translation.x, translation.y);
     }
 }
 
 - (void)resetParameters {
-
+    
     NSInteger numberOfTotalImagesOnCollectionView = NUMBER_OF_ITEMS_IN_COLLECTION_VIEW;
-
+    
     if (self.stateOfCurrentGame != initialGameState) {
         self.stateOfCurrentGame = firstInstructionRead;
     }
-
+    
     self.proceedButton.alpha = 0.0;
     self.wrongAnswerButton.alpha = 0.0;
     self.revealationImage.alpha = 0.0;
@@ -204,84 +204,84 @@ typedef enum gameState currentGameState;
     [self.imageSequenceStorage removeAllObjects];
     
     //Total number of images to display on the screen
-
+    
     while (numberOfTotalImagesOnCollectionView) {
-        [self.imageSequenceStorage addObject:[NSString stringWithFormat:@"%d", [DHUtilityMethodsProvider getRandomNumber]]];
+        [self.imageSequenceStorage addObject:[NSString stringWithFormat:@"%ld", (long)[DHUtilityMethodsProvider getRandomNumber]]];
         numberOfTotalImagesOnCollectionView--;
     }
-
+    
     //Initializing index paths
     self.previousSelectedRowInPrimaryTable = [NSIndexPath indexPathForRow:-1 inSection:0];
     self.selectedRowInPrimaryTable = [NSIndexPath indexPathForRow:-1 inSection:0];
     //Decide, which image to show up when revealed - Gets reset each time and is selected randomely
     self.fixedImageNumber = [DHUtilityMethodsProvider getRandomNumber];
-
+    
     [self configureInstructionViewWithImage:@"" andInstrcutionTitle:@"Please follow the Instructions View"];
     [self.mainCollectionView reloadData];
 }
 
 - (UICollectionViewCell*)collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath*)indexPath {
-
+    
     //For each cell we will make sure cell falls in pre selected category then just make background colorful. Otherwise just keep it white
-
+    
     DHCollectionViewIconCell* iconCell = [self.mainCollectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-
+    
     if (indexPath.row == self.selectedRowInPrimaryTable.row) {
         [iconCell setBackgroundColor:[DHColorDefaults getLightOrangeColor]];
     } else {
         [iconCell setBackgroundColor:[UIColor whiteColor]];
     }
-
-    iconCell.label.text = [NSString stringWithFormat:@"%d", indexPath.row];
-
-
-        if ([self isNumberDivisibleBy9WithInputNumber:indexPath.row]) {
-
-            [iconCell.image setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png", self.fixedImageNumber]]];
-        } else {
-
-            [iconCell.image setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png", self.imageSequenceStorage[indexPath.row]]]];
-        }
-
-
+    
+    iconCell.label.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+    
+    
+    if ([self isNumberDivisibleBy9WithInputNumber:indexPath.row]) {
+        
+        [iconCell.image setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%ld.png", (long)self.fixedImageNumber]]];
+    } else {
+        
+        [iconCell.image setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png", self.imageSequenceStorage[indexPath.row]]]];
+    }
+    
+    
     return iconCell;
 }
 
 - (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
-
+    
     return NUMBER_OF_ITEMS_IN_COLLECTION_VIEW;
 }
 
 - (void)collectionView:(UICollectionView*)collectionView didSelectItemAtIndexPath:(NSIndexPath*)indexPath {
-
+    
     if(self.stateOfCurrentGame==revealButtonPressed){
         return;
     }
     
     if (self.stateOfCurrentGame == firstInstructionRead) {
-
+        
         self.stateOfCurrentGame=collectionCellSelected;
         
         if (!self.didUserSelectOption) {
             
-
+            
             //Update selection indicator for primary table
             self.didUserSelectOption = YES;
-
+            
             [UIView transitionWithView:nil
                               duration:DEFAULT_DURATION_FOR_ANIMATION
                                options:UIViewAnimationOptionTransitionCrossDissolve
                             animations:^{
-                        self.proceedButton.alpha=0.8;
+                                self.proceedButton.alpha=0.8;
                             }
                             completion:NULL];
         }
-
+        
         self.previousSelectedRowInPrimaryTable = self.selectedRowInPrimaryTable;
         self.selectedRowInPrimaryTable = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
-
+        
         if (self.previousSelectedRowInPrimaryTable.row != -1 && self.previousSelectedRowInPrimaryTable.row != self.selectedRowInPrimaryTable.row) {
-
+            
             [self.mainCollectionView reloadItemsAtIndexPaths:@[ self.selectedRowInPrimaryTable, self.previousSelectedRowInPrimaryTable ]];
         } else {
             [self.mainCollectionView reloadItemsAtIndexPaths:@[ self.selectedRowInPrimaryTable ]];
@@ -304,7 +304,7 @@ typedef enum gameState currentGameState;
     if (inputNumber < 9){
         return false;
     }
-
+    
     // If n is greater than 9, then recur for [floor(n/9) - n%8]
     return [self isNumberDivisibleBy9WithInputNumber:((int)(inputNumber >> 3) - (int)(inputNumber & 7))];
 }
@@ -315,26 +315,26 @@ typedef enum gameState currentGameState;
 
 - (IBAction)resetButtonPressed:(id)sender {
     [self resetParameters];
-
+    
     [UIView transitionWithView:nil
                       duration:DEFAULT_DURATION_FOR_ANIMATION
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-
+                        
                         [self hideInstructionView];
                     }
                     completion:NULL];
 }
 
 - (IBAction)proceedButtonPressed:(id)sender {
-
+    
     if (self.didUserSelectOption) {
-
+        
         self.instructionLabel.text = @"Now Reverse the number and then substract original number from the value of reveresed number. After that, press reveal button to reveal image adjacent to that number on screen";
         [self.okButton setTitle:@"Reveal" forState:UIControlStateNormal];
-
+        
         [self.okButton addTarget:self action:@selector (revealSelectedOption:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         [UIView transitionWithView:nil
                           duration:DEFAULT_DURATION_FOR_ANIMATION
                            options:UIViewAnimationOptionTransitionCrossDissolve
@@ -342,10 +342,10 @@ typedef enum gameState currentGameState;
                             [self showInstructionView];
                         }
                         completion:NULL];
-
+        
     } else {
-
-
+        
+        
         [self showGeneralAlertViewWithTitle:@"No Option selected" andMessage:@"Please select an option to reveal predication"];
     }
 }
@@ -357,76 +357,76 @@ typedef enum gameState currentGameState;
 }
 
 - (void)showInstructionViewWithText:(NSString*)text andIsRevealingView:(BOOL)isRevealingView {
-
-
+    
+    
     [self.instructionsNotificationsView setBackgroundColor:[DHColorDefaults getLightVioletColor]];
-
-
-
-
+    
+    
+    
+    
     self.instructionLabel.backgroundColor = self.instructionsNotificationsView.backgroundColor;
     self.instructionLabel.numberOfLines = 8;
     self.instructionLabel.textAlignment = NSTextAlignmentCenter;
     self.instructionLabel.font = [DHColorDefaults getDefaultInstructionViewFontWithSize:24.0f];
     self.instructionLabel.text = text;
-
+    
     [self addCircularCornerToView:self.instructionLabel WithRadius:30.0f];
-
+    
     if (isRevealingView) {
-
+        
         self.loadingAnimationHolderView.alpha = 1.0;
-
-
-        [self.revealationImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png", self.fixedImageNumber]]];
+        
+        
+        [self.revealationImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%ld.png", (long)self.fixedImageNumber]]];
         self.revealationImage.alpha = 0.0;
-
+        
         [self.instructionsNotificationsView addSubview:self.revealationImage];
-
-
-
-
-
+        
+        
+        
+        
+        
         self.wrongAnswerButton.alpha = 1.0;
         self.resetButton.alpha=1.0;
-       
-       
+        
+        
         
         self.instructionsNotificationsView.frame = CGRectMake (self.mainCollectionView.center.x - 200, 150, 450, 450);
         self.instructionLabel.frame = CGRectMake (10, 10, self.instructionsNotificationsView.frame.size.width - 20, 300);
-
+        
         [UIView transitionWithView:nil
                           duration:DEFAULT_DURATION_FOR_REVEAL_IMAGE_ANIMATION
                            options:UIViewAnimationOptionTransitionCrossDissolve
                         animations:^{
-                                                    self.loadingAnimationHolderView.alpha = 0.0;
-                                self.revealationImage.alpha = 1.0;
+                            self.loadingAnimationHolderView.alpha = 0.0;
+                            self.revealationImage.alpha = 1.0;
                         }
                         completion:NULL];
-
+        
     } else {
         self.okButton.frame = CGRectMake (10, self.instructionLabel.frame.origin.y + 330, self.instructionsNotificationsView.frame.size.width - 20, 60);
         [self.okButton setTitle:@"Ok" forState:UIControlStateNormal];
         [self.okButton addTarget:self action:@selector (okButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
-
+    
     //Ok Button
     //Button with okay or got it text on it.
-
+    
     [self.okButton.titleLabel setFont:[DHColorDefaults getDefaultInstructionViewFontWithSize:24.0f]];
-
+    
     [self.instructionsNotificationsView addSubview:self.okButton];
-
+    
     //Circular round border to view
     [self addCircularCornerToView:self.instructionsNotificationsView WithRadius:30.0f];
-
+    
     //Border to View
     [self addBorderDesignToView:self.instructionsNotificationsView andColor:[DHColorDefaults getLightVioletColor] andBorderWidth:2.0f];
-
+    
     // drop shadow
     [self addShadowToView:self.instructionsNotificationsView withColor:[DHColorDefaults getLightVioletColor] andOpacity:1.0 andRadius:3.0f andOffset:CGSizeMake (3.0f, 3.0f)];
-
+    
     [self.view addSubview:self.instructionsNotificationsView];
-
+    
     [UIView transitionWithView:nil
                       duration:DEFAULT_DURATION_FOR_ANIMATION
                        options:UIViewAnimationOptionTransitionCrossDissolve
@@ -459,12 +459,12 @@ typedef enum gameState currentGameState;
 
 - (IBAction)okButtonPressed:(id)sender {
     self.stateOfCurrentGame = firstInstructionRead;
-
+    
     [UIView transitionWithView:nil
                       duration:DEFAULT_DURATION_FOR_ANIMATION
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-
+                        
                         [self hideInstructionView];
                     }
                     completion:NULL];
@@ -487,92 +487,92 @@ typedef enum gameState currentGameState;
     self.loadingAnimationHolderView = [[UIView alloc] initWithFrame:CGRectMake (0, 0, 450, 450)];
     self.loadingAnimationHolderView.alpha = 0.0;
     [self.loadingAnimationHolderView setBackgroundColor:[UIColor whiteColor]];
-
-
-
-
+    
+    
+    
+    
     UIImageView* greenLoadingCircle = [[UIImageView alloc] initWithFrame:CGRectMake (positionToGo, initialYPositionOfAnimationBalls, 48, 48)];
     [greenLoadingCircle setImage:[UIImage imageNamed:@"circle1.jpeg"]];
     [self.loadingAnimationHolderView addSubview:greenLoadingCircle];
     //Green
-
+    
     UIImageView* redLoadingCircle = [[UIImageView alloc] initWithFrame:CGRectMake (positionToGo - triangleSideLength, initialYPositionOfAnimationBalls + triangleHeight, 48, 48)];
     [redLoadingCircle setImage:[UIImage imageNamed:@"circle2.jpeg"]];
     //RED
     [self.loadingAnimationHolderView addSubview:redLoadingCircle];
-
+    
     UILabel* loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake (140, 200, 170, 60)];
     loadingLabel.font = [UIFont boldSystemFontOfSize:20];
     loadingLabel.numberOfLines = 3;
     loadingLabel.text = @"Calculating your chosen Number..";
     loadingLabel.alpha = 1.0f;
-
+    
     UILabel* secondLoadingLabel = [[UILabel alloc] initWithFrame:CGRectMake (150, 200, 150, 60)];
     secondLoadingLabel.font = [UIFont boldSystemFontOfSize:20];
     secondLoadingLabel.numberOfLines = 3;
     secondLoadingLabel.text = @"Almost There..";
     secondLoadingLabel.alpha = 0.0f;
-
+    
     UILabel* randomNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake (200, 270, 40, 40)];
     randomNumberLabel.font = [UIFont boldSystemFontOfSize:20];
-
+    
     randomNumberLabel.text = @"0";
     randomNumberLabel.alpha = 1.0f;
-
+    
     [NSTimer scheduledTimerWithTimeInterval:0.15
                                      target:self
                                    selector:@selector (showNumbers:)
                                    userInfo:@{ @"numberLabel" : randomNumberLabel }
                                     repeats:YES];
-
+    
     UIImageView* blueLoadingCircle = [[UIImageView alloc] initWithFrame:CGRectMake (positionToGo + triangleSideLength, initialYPositionOfAnimationBalls + triangleHeight, 48, 48)];
     [blueLoadingCircle setImage:[UIImage imageNamed:@"circle3.jpeg"]];
     [self.loadingAnimationHolderView addSubview:blueLoadingCircle];
-
+    
     [UIView animateKeyframesWithDuration:2.0 delay:0.0 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
         [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
-
-                        greenLoadingCircle.frame=CGRectMake(positionToGo-triangleSideLength, initialYPositionOfAnimationBalls+triangleHeight, 48, 48);
-                        redLoadingCircle.frame=CGRectMake(positionToGo+triangleSideLength,initialYPositionOfAnimationBalls+triangleHeight, 48, 48);
-                        blueLoadingCircle.frame=CGRectMake(positionToGo, initialYPositionOfAnimationBalls, 48, 48);
+            
+            greenLoadingCircle.frame=CGRectMake(positionToGo-triangleSideLength, initialYPositionOfAnimationBalls+triangleHeight, 48, 48);
+            redLoadingCircle.frame=CGRectMake(positionToGo+triangleSideLength,initialYPositionOfAnimationBalls+triangleHeight, 48, 48);
+            blueLoadingCircle.frame=CGRectMake(positionToGo, initialYPositionOfAnimationBalls, 48, 48);
             
             
         }];
         [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
-
+            
             greenLoadingCircle.frame=CGRectMake(positionToGo+triangleSideLength, initialYPositionOfAnimationBalls+triangleHeight, 48, 48);
             redLoadingCircle.frame=CGRectMake(positionToGo, initialYPositionOfAnimationBalls, 48, 48);
             blueLoadingCircle.frame=CGRectMake(positionToGo-triangleSideLength, initialYPositionOfAnimationBalls+triangleHeight, 48, 48);
             
         }];
     } completion:nil];
-
+    
     [UIView animateKeyframesWithDuration:3.0 delay:0.0 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
         [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
             
-          
+            
             loadingLabel.alpha=0.0;
             secondLoadingLabel.alpha=1.0;
             
         }];
         [UIView addKeyframeWithRelativeStartTime:4.0 relativeDuration:0.5 animations:^{
             
-          
+            
             loadingLabel.alpha=1.0;
             secondLoadingLabel.alpha=0.0;
         }];
     } completion:nil];
-
+    
     [self.loadingAnimationHolderView addSubview:loadingLabel];
     [self.loadingAnimationHolderView addSubview:secondLoadingLabel];
     [self.loadingAnimationHolderView addSubview:randomNumberLabel];
-        [self addCircularCornerToView:self.loadingAnimationHolderView WithRadius:30.0f];
+    [self addCircularCornerToView:self.loadingAnimationHolderView WithRadius:30.0f];
     [self.instructionsNotificationsView addSubview:self.loadingAnimationHolderView];
     [self.instructionsNotificationsView bringSubviewToFront:self.loadingAnimationHolderView];
 }
 
 - (void)showNumbers:(NSTimer*)timer {
-
+    
     NSDictionary* dictionaryWithLabel = [timer userInfo];
     UILabel* randomNumberLabel = dictionaryWithLabel[@"numberLabel"];
     randomNumberLabel.text = [NSString stringWithFormat:@"%d", arc4random () % 100];
@@ -581,13 +581,13 @@ typedef enum gameState currentGameState;
 - (void)hideInstructionView {
     
     
-
+    
     
     self.instructionsNotificationsView.transform = CGAffineTransformMakeScale(1, 1);
-        self.instructionLabel.transform = CGAffineTransformMakeScale(1, 1);
-        self.okButton.transform = CGAffineTransformMakeScale(1, 1);
+    self.instructionLabel.transform = CGAffineTransformMakeScale(1, 1);
+    self.okButton.transform = CGAffineTransformMakeScale(1, 1);
     
-
+    
     [UIView animateWithDuration:DEFAULT_DURATION_FOR_ANIMATION
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseOut
@@ -596,7 +596,7 @@ typedef enum gameState currentGameState;
                          self.instructionsNotificationsView.transform = CGAffineTransformMakeScale(0.0, 0.0);
                          //self.instructionsNotificationsView.center = self.view.center;
                          self.instructionLabel.transform = CGAffineTransformMakeScale(0.0, 0.0);
-                        // self.instructionLabel.center = self.view.center;
+                         // self.instructionLabel.center = self.view.center;
                          self.okButton.transform = CGAffineTransformMakeScale(0.0, 0.0);
                          //self.okButton.center = self.view.center;
                      }
@@ -605,7 +605,7 @@ typedef enum gameState currentGameState;
 }
 
 - (void)showInstructionView {
-
+    
     
     self.instructionsNotificationsView.transform = CGAffineTransformMakeScale(0.1, 0.1);
     self.instructionLabel.transform = CGAffineTransformMakeScale(0.1, 0.1);
